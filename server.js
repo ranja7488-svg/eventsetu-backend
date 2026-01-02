@@ -3,7 +3,7 @@ const app = express();
 
 app.use(express.json());
 
-// ✅ CORS allow (VERY IMPORTANT)
+// ✅ CORS allow
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Content-Type");
@@ -11,22 +11,22 @@ app.use((req, res, next) => {
   next();
 });
 
-// ✅ ROOT
+// ✅ ROOT ROUTE
 app.get("/", (req, res) => {
   res.send("EventSetu Backend Running");
 });
 
-// ✅ TEST ROUTE (YEH HI BUTTON 4 USE KARTA HAI)
+// ✅ TEST ROUTE (VERY IMPORTANT)
 app.get("/test", (req, res) => {
   res.send("Hello from Backend ✅");
 });
 
-// ✅ REGISTER
+// ✅ REGISTER ROUTE
 app.post("/register", (req, res) => {
   res.json({ message: "Registered Successfully" });
 });
 
-// ✅ BOOKING
+// ✅ BOOKING ROUTE
 app.post("/booking", (req, res) => {
   res.json({ message: "Booking Submitted Successfully" });
 });
