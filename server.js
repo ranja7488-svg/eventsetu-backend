@@ -1,10 +1,13 @@
 const express = require("express");
 const app = express();
 
-// ✅ CORS allow for all
+// allow JSON
+app.use(express.json());
+
+// CORS allow
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
 
@@ -12,8 +15,18 @@ app.get("/", (req, res) => {
   res.send("EventSetu Backend Running");
 });
 
-app.get("/test", (req, res) => {
-  res.send("Hello from Backend ✅");
+// 🔥 REGISTER API
+app.post("/register", (req, res) => {
+  const { name, mobile, city } = req.body;
+
+  if (!name || !mobile || !city) {
+    return res.status(400).json({ message: "All fields required" });
+  }
+
+  res.json({
+    message: "Registered Successfully",
+    user: { name, mobile, city }
+  });
 });
 
 app.listen(10000, () => {
