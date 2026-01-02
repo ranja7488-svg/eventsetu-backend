@@ -32,3 +32,17 @@ app.post("/register", (req, res) => {
 app.listen(10000, () => {
   console.log("Server started");
 });
+// 🔥 BOOKING API
+app.post("/booking", (req, res) => {
+  const { eventType, eventDate, budget } = req.body;
+
+  if (!eventType || !eventDate || !budget) {
+    return res.status(400).json({ message: "All booking fields required" });
+  }
+
+  res.json({
+    message: "Booking Submitted Successfully",
+    booking: { eventType, eventDate, budget }
+  });
+});
+
