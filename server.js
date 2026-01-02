@@ -1,48 +1,36 @@
 const express = require("express");
 const app = express();
 
-// allow JSON
 app.use(express.json());
 
-// CORS allow
+// ✅ CORS allow (VERY IMPORTANT)
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.header("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
   next();
 });
 
+// ✅ ROOT
 app.get("/", (req, res) => {
   res.send("EventSetu Backend Running");
 });
 
-// 🔥 REGISTER API
+// ✅ TEST ROUTE (YEH HI BUTTON 4 USE KARTA HAI)
+app.get("/test", (req, res) => {
+  res.send("Hello from Backend ✅");
+});
+
+// ✅ REGISTER
 app.post("/register", (req, res) => {
-  const { name, mobile, city } = req.body;
+  res.json({ message: "Registered Successfully" });
+});
 
-  if (!name || !mobile || !city) {
-    return res.status(400).json({ message: "All fields required" });
-  }
-
-  res.json({
-    message: "Registered Successfully",
-    user: { name, mobile, city }
-  });
+// ✅ BOOKING
+app.post("/booking", (req, res) => {
+  res.json({ message: "Booking Submitted Successfully" });
 });
 
 app.listen(10000, () => {
   console.log("Server started");
 });
-// 🔥 BOOKING API
-app.post("/booking", (req, res) => {
-  const { eventType, eventDate, budget } = req.body;
-
-  if (!eventType || !eventDate || !budget) {
-    return res.status(400).json({ message: "All booking fields required" });
-  }
-
-  res.json({
-    message: "Booking Submitted Successfully",
-    booking: { eventType, eventDate, budget }
-  });
-});
-
